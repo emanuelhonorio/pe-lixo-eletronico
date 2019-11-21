@@ -1,10 +1,10 @@
 package com.emanuelhonorio.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -22,9 +22,8 @@ public class Usuario extends BaseEntity {
 
 	private Double estrelas;
 
-	@JsonIgnore
-	@Lob
-	private byte[] foto;
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Foto foto;
 
 	public String getNome() {
 		return nome;
@@ -58,11 +57,11 @@ public class Usuario extends BaseEntity {
 		this.estrelas = estrelas;
 	}
 
-	public byte[] getFoto() {
+	public Foto getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(Foto foto) {
 		this.foto = foto;
 	}
 

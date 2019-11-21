@@ -3,6 +3,7 @@ package com.emanuelhonorio.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,7 +35,7 @@ public class Publicacao extends BaseEntity {
 	@JoinColumn(name = "fk_usuario_id")
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "publicacao")
+	@OneToMany(mappedBy = "publicacao", cascade = CascadeType.ALL)
 	private List<Foto> fotos = new ArrayList<>();
 
 	public String getTitulo() {

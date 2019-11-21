@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.emanuelhonorio.model.Publicacao;
 import com.emanuelhonorio.model.Usuario;
@@ -48,6 +51,12 @@ public class PublicacaoResource {
 	public Publicacao publicar(@RequestBody @Valid Publicacao publicacao, Principal principal) {
 		Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
 		return publicacaoService.publicar(publicacao, usuario);
+	}
+	
+	@PutMapping("/{id}/fotos")
+	public ResponseEntity<?> uparFotos(@PathVariable Long id, @RequestParam("files") MultipartFile[] files) {
+		Publicacao publicacao = publicacaoService.uparFotos(files, id);
+		return ResponseEntity.ok(publicacao);
 	}
 	
 	@DeleteMapping("/{id}")

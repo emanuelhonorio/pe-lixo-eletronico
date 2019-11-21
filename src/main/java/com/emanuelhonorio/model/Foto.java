@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -31,11 +32,30 @@ public class Foto implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="fk_publicacao_id")
+	@JoinColumn(name = "fk_publicacao_id")
 	private Publicacao publicacao;
 
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name = "fk_usuario_id")
+	private Usuario usuario;
+
+	public Foto() {
+		super();
+	}
+
+	public Foto(@NotNull byte[] arquivo) {
+		super();
+		this.arquivo = arquivo;
+	}
+
 	@Transient
-	private String url;
+	public String getUrl() {
+		if (this.id != null) {
+			return "http://localhost:8080/fotos/" + this.id;
+		}
+		return null;
+	}
 
 	public byte[] getArquivo() {
 		return arquivo;
@@ -53,20 +73,20 @@ public class Foto implements Serializable {
 		this.publicacao = publicacao;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
