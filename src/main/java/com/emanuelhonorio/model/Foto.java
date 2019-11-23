@@ -1,6 +1,8 @@
 package com.emanuelhonorio.model;
 
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,11 +50,12 @@ public class Foto implements Serializable {
 		super();
 		this.arquivo = arquivo;
 	}
+	
 
 	@Transient
-	public String getUrl() {
+	public String getUrl() throws UnknownHostException {
 		if (this.id != null) {
-			return "http://localhost:8080/fotos/" + this.id;
+			return "http://" + InetAddress.getLocalHost().getHostAddress() + ":3001/fotos/"+this.id;
 		}
 		return null;
 	}

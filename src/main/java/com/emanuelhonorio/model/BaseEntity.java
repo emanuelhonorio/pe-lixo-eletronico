@@ -30,7 +30,7 @@ public class BaseEntity implements Serializable {
 	@JsonProperty(access = Access.READ_ONLY)
 	@CreatedDate
 	@Column(name = "created_at")
-	private LocalDateTime createadAt;
+	private LocalDateTime createdAt;
 
 	@JsonProperty(access = Access.READ_ONLY)
 	@LastModifiedDate
@@ -70,12 +70,12 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDateTime getCreateadAt() {
-		return createadAt;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreateadAt(LocalDateTime createadAt) {
-		this.createadAt = createadAt;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public LocalDateTime getUpdatedAt() {
